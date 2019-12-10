@@ -21,7 +21,9 @@ class SessionsController < ApplicationController
 
   def github_login
     token = request.env["omniauth.auth"]["credentials"]["token"]
+    gh_id = request.env["omniauth.auth"]["extra"]["raw_info"]["id"]
     current_user.update_attribute(:token, token)
+    current_user.update_attribute(:gh_id, gh_id)
     redirect_to dashboard_path
   end
 end
