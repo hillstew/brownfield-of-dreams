@@ -79,5 +79,11 @@ describe 'User' do
         expect(page).to have_content(@user_2.full_name)
       end
     end
+
+    it "should see a flash message if friend id doesnt exists" do
+      visit '/add_friend/49857389'
+
+      expect(page).to have_content("Yikes, could not find that friend")
+    end
   end
 end
