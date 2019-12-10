@@ -5,8 +5,8 @@
 
   <h3>Account Details</h3>
   <ul>
-    <li> <%= user.first_name  %> <%= user.last_name %> </li>
-    <li> <%= user.email%> </li>
+    <li> <%= user.full_name %> </li>
+    <li> <%= user.email %> </li>
     <li>Status: <%= user.status.capitalize%> </li>
   </ul>
   <% if user.token %>
@@ -24,8 +24,11 @@
       <h2>Followers</h2>
       <% if !user.followers.empty? %>
         <% user.followers.each do |follower| %>
-          <%= link_to follower.name.capitalize, follower.url, class: 'github-follower' %>
-        <% end %>
+          <section id="follower-links-<%= follower.gh_id %>">
+            <%= link_to follower.name.capitalize, follower.url, class: 'github-follower' %>
+            <%= link_to "Add Friend", add_friend_path(follower.gh_id) if follower.has_account? && !user.friends_with?(follower) %>
+          </section>
+          <% end %>
       <% else %>
         <p>You don't have any Github followers</p>
       <% end %>
@@ -34,10 +37,23 @@
       <h2>Following</h2>
       <% if !user.following.empty? %>
         <% user.following.each do |following| %>
-          <%= link_to following.name.capitalize, following.url, class: 'github-following' %>
+          <section id="following-links-<%= following.gh_id %>">
+            <%= link_to following.name.capitalize, following.url, class: 'github-following' %>
+            <%= link_to "Add Friend", add_friend_path(following.gh_id) if following.has_account? && !user.friends_with?(following) %>
+          </section>
         <% end %>
       <% else %>
         <p>You aren't following anyone on Github</p>
+      <% end %>
+    </section>
+    <section id="friends">
+      <h2>Friends</h2>
+      <% if !user.friends.empty? %>
+        <% user.friends.each do |friend| %>
+         <p><%= friend.full_name %></p>
+        <% end %>
+      <% else %>
+        <p>You aren't friends with anyone</p>
       <% end %>
     </section>
   <% elsif current_user.default? %>
