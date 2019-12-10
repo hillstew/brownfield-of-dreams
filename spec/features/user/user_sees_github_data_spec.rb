@@ -21,7 +21,6 @@ describe 'User' do
       within("#repositories") do
         expect(page).to have_link(count: 5)
       end
-      # expect(page).to have_css('.github-repo', count: 5)
     end
 
     it "can see all github followers" do
@@ -58,6 +57,26 @@ describe 'User' do
       end
       within('#following') do
         expect(page).to have_content("You aren't following anyone on Github")
+      end
+    end
+
+    it "should be able to add friends who are in the database" do
+      @user_2 = create(:user, token: ENV['USER_GITHUB_TOKEN_2'], gh_id: 36748280)
+      
+      click_button "Connect to Github"
+
+      within "#follower-links-#{@user_2.gh_id}" do
+        click_link "Add Friend"
+      end
+      
+      expect(current_path).to eq(dashboard_path)
+
+      within "#follower-links-#{@user_2.gh_id}" do
+        expect(page).to_not have_link("Add Friend")
+      end
+
+      within "#friends" do
+        expect(page).to have_content(@user_2.full_name)
       end
     end
   end
