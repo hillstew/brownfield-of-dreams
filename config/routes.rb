@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   get '/activation', to: 'activation#update'
   get '/add_friend/:follower_id', to: 'friendships#create', as: :add_friend
+  get '/invite', to: 'invitation#new'
+  post '/invite', to: 'invitation#create', as: :send_invite
 
   namespace :admin do
     get "/dashboard", to: "dashboard#show"
@@ -19,11 +21,11 @@ Rails.application.routes.draw do
     end
     resources :videos, only: [:edit, :update, :destroy]
 
-    namespace :api do
-      namespace :v1 do
-        put "tutorial_sequencer/:tutorial_id", to: "tutorial_sequencer#update"
-      end
-    end
+    # namespace :api do
+    #   namespace :v1 do
+    #     # put "tutorial_sequencer/:tutorial_id", to: "tutorial_sequencer#update"
+    #   end
+    # end
   end
 
   get '/login', to: "sessions#new"
