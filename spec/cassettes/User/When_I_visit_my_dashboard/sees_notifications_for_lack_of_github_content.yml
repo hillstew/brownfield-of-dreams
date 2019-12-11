@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Tue, 10 Dec 2019 22:35:42 GMT
+      - Wed, 11 Dec 2019 22:51:17 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -31,9 +31,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4999'
+      - '4990'
       X-Ratelimit-Reset:
-      - '1576020942'
+      - '1576107761'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
@@ -65,12 +65,12 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Github-Request-Id:
-      - C719:07D2:16A021D:38E7640:5DF01DBE
+      - D1DA:2F3E:1F4E14A:4C194CA:5DF172E4
     body:
       encoding: UTF-8
       string: "[]"
     http_version: 
-  recorded_at: Tue, 10 Dec 2019 22:35:41 GMT
+  recorded_at: Wed, 11 Dec 2019 22:51:17 GMT
 - request:
     method: get
     uri: https://api.github.com/user/followers?access_token=<EMPTY_USER_TOKEN>
@@ -92,7 +92,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Tue, 10 Dec 2019 22:35:43 GMT
+      - Wed, 11 Dec 2019 22:51:17 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -102,9 +102,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4998'
+      - '4989'
       X-Ratelimit-Reset:
-      - '1576020942'
+      - '1576107761'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
@@ -136,12 +136,12 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Github-Request-Id:
-      - C71A:49CE:6EFE0C:1064552:5DF01DBF
+      - D1DB:2C4C:E721EE:24C0881:5DF172E5
     body:
       encoding: UTF-8
       string: "[]"
     http_version: 
-  recorded_at: Tue, 10 Dec 2019 22:35:41 GMT
+  recorded_at: Wed, 11 Dec 2019 22:51:17 GMT
 - request:
     method: get
     uri: https://api.github.com/user/following?access_token=<EMPTY_USER_TOKEN>
@@ -163,7 +163,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Tue, 10 Dec 2019 22:35:43 GMT
+      - Wed, 11 Dec 2019 22:51:17 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -173,9 +173,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4997'
+      - '4988'
       X-Ratelimit-Reset:
-      - '1576020942'
+      - '1576107761'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
@@ -207,10 +207,10 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Github-Request-Id:
-      - C71B:17B2:1E5FE52:49994D1:5DF01DBF
+      - D1DC:717E:20BFFD4:4DE6E66:5DF172E5
     body:
       encoding: UTF-8
       string: "[]"
     http_version: 
-  recorded_at: Tue, 10 Dec 2019 22:35:41 GMT
+  recorded_at: Wed, 11 Dec 2019 22:51:17 GMT
 recorded_with: VCR 4.0.0
