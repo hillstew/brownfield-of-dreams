@@ -10,6 +10,7 @@
     <li>Status: <%= user.status.capitalize%> </li>
   </ul>
   <% if user.token %>
+    <%= button_to "Send an Invite", invite_path, method: :get %>
     <section id="repositories">
       <h2>Repositories</h2>
       <% if !user.repos.empty? %>
