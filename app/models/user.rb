@@ -22,4 +22,20 @@ class User < ApplicationRecord
       true
     end
   end
+
+  def raw_bookmarks
+    videos.joins(:tutorial).
+    select('videos.*').
+    group('tutorials.id, videos.id').
+    order(:tutorial_id, :position)
+  end
+
+  def bookmarks
+    finished_bookmarks = {}
+    raw_bookmarks.each do |bookmark|
+      finished_bookmarks[bookmark.tutorial_id] ||= []
+      finished_bookmarks[bookmark.tutorial_id] << bookmark
+    end
+    finished_bookmarks
+  end
 end
