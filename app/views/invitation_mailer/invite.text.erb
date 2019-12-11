@@ -1,0 +1,4 @@
+Hello <%= @invitee[:name] ? @invitee[:name] : "hi (yikes, you have no name on Github)" %>
+
+<%= @current_user.first_name %>has invited you to join Brownfield Tutorials. 
+  You can create an account <%= link_to "here", register_url %>.
