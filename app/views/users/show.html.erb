@@ -61,6 +61,18 @@
     <%= button_to 'Connect to Github', "/auth/github", class: 'btn btn-primary mb1 bg-teal' %>
   <% end %>
 
-  <section>
+  <section class = "bookmarks" >
     <h2>Bookmarked Segments</h2>
+    <% if !user.user_videos.empty? %>
+      <% user.bookmarks.keys.each do |tutorial_id| %>
+        <section class = "tutorial-<%= tutorial_id %>">
+        <h3><%= Tutorial.find(tutorial_id).title %></h3>
+        <% user.bookmarks[tutorial_id].each do |video| %>
+          <li class = "video-<%= video.position %>">
+            <%= link_to video.title, "/tutorials/#{tutorial_id}?video_id=#{video.id}" %>
+          </li>
+        <% end %>
+      </section>
+      <% end %>
+    <% end %>
   </section>
