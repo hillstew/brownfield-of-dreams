@@ -18,6 +18,11 @@ class GithubService
     parse_data(response)
   end
 
+  def fetch_invitee_info(handle)
+    response = fetch_data("users/#{handle}")
+    parse_data(response)
+  end
+
   private
     def fetch_data(url)
       conn.get(url)
