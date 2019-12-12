@@ -42,7 +42,7 @@ prework_tutorial_2.videos.create!({
   "position"=> 2
 })
 
-prework_tutorial.videos.create!({
+vid_1 = prework_tutorial.videos.create!({
   "title"=>"Prework - Environment Setup",
   "description"=> Faker::Hipster.paragraph(2, true),
   "video_id"=>"qMkRHW9zE1c",
@@ -142,7 +142,7 @@ m3_tutorial.videos.create!({
   "thumbnail"=>"https://i.ytimg.com/vi/lqx4sD0E6eY/hqdefault.jpg",
   "position"=>5
 })
-m3_tutorial.videos.create!({
+vid_2 = m3_tutorial.videos.create!({
   "title"=>"BDD - Consuming an API",
   "description"=> Faker::Hipster.paragraph(2, true),
   "video_id"=>"FcgkfZEv_LI",
@@ -151,5 +151,8 @@ m3_tutorial.videos.create!({
 })
 
 User.create!(email: 'admin@example.com', first_name: 'Bossy', last_name: 'McBosserton', password:  "password", role: :admin)
-User.create!(email: 'default@example.com', first_name: 'User', last_name: 'Userton', password:  "password", role: :default)
+default = User.create!(email: 'default@example.com', first_name: 'User', last_name: 'Userton', password:  "password", role: :default)
 User.create!(email: 'default2@example.com', first_name: 'User2', last_name: 'Userton', password:  "password", role: :default)
+
+UserVideo.create(user_id: default.id, video_id: vid_1.id)
+UserVideo.create(user_id: default.id, video_id: vid_2.id)
