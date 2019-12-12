@@ -1,4 +1,5 @@
 module YouTube
+  # app/models/you_tube/video.rb
   class Video
     attr_reader :thumbnail
 

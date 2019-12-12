@@ -1,3 +1,4 @@
+# app/facades/tutorial_facade.rb
 class TutorialFacade < SimpleDelegator
   def initialize(tutorial, video_id = nil)
     super(tutorial)
@@ -17,7 +18,7 @@ class TutorialFacade < SimpleDelegator
   end
 
   def play_next_video?
-    !(current_video.position >= maximum_video_position)
+    (current_video.position < maximum_video_position)
   end
 
   private

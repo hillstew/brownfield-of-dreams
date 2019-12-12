@@ -1,3 +1,4 @@
+# app/models/github_user.rb
 class GithubUser
   attr_reader :name, :url, :gh_id
 
@@ -7,7 +8,7 @@ class GithubUser
     @gh_id = user_data[:id]
   end
 
-  def has_account?
-    User.find_by(gh_id: self.gh_id)
+  def account?
+    User.find_by(gh_id: gh_id)
   end
 end

@@ -1,3 +1,4 @@
+# app/models/user.rb
 class User < ApplicationRecord
   has_many :user_videos
   has_many :videos, through: :user_videos
@@ -6,7 +7,7 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true, presence: true
   validates_presence_of :first_name
-  enum role: [:default, :admin]
+  enum role: %i[default admin]
   has_secure_password
 
   def full_name
@@ -24,10 +25,10 @@ class User < ApplicationRecord
   end
 
   def raw_bookmarks
-    videos.joins(:tutorial).
-    select('videos.*').
-    group('tutorials.id, videos.id').
-    order(:tutorial_id, :position)
+    videos.joins(:tutorial)
+          .select('videos.*')
+          .group('tutorials.id, videos.id')
+          .order(:tutorial_id, :position)
   end
 
   def bookmarks

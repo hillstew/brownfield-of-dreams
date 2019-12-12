@@ -1,3 +1,4 @@
+# app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :find_bookmark

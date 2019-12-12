@@ -1,10 +1,11 @@
+# app/controllers/users_controller.rb
 class UsersController < ApplicationController
   def show
-    if current_user
-      render locals: {
-        user: UserDecorator.new(current_user)
-      }
-    end
+    return unless current_user
+
+    render locals: {
+      user: UserDecorator.new(current_user)
+    }
   end
 
   def new
@@ -12,13 +13,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
-    if user.save
-      session[:user_id] = user.id
-      RegistrationMailer.activate(user).deliver_now
-      flash[:success] = "Logged in as #{user.first_name}."
-      flash[:notice] = "This account has not yet been activated. Please check your email."
-      redirect_to dashboard_path
+    if (user = User.create(user_params))
+      creation_success(user)
     else
       flash[:error] = 'Username already exists'
       render :new
@@ -32,8 +28,16 @@ class UsersController < ApplicationController
 
   private
 
+  def creation_success(user)
+    session[:user_id] = user.id
+    RegistrationMailer.activate(user).deliver_now
+    flash[:success] = "Logged in as #{user.first_name}."
+    flash[:notice] =
+      'This account has not yet been activated. Please check your email.'
+    redirect_to dashboard_path
+  end
+
   def user_params
     params.require(:user).permit(:email, :first_name, :last_name, :password)
   end
-
 end
