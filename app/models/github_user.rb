@@ -9,6 +9,10 @@ class GithubUser
   end
 
   def account?
-    User.find_by(gh_id: gh_id)
+    if User.find_by(gh_id: gh_id)
+      true
+    else
+      false
+    end
   end
 end

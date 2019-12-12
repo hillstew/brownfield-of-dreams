@@ -22,4 +22,44 @@ RSpec.describe User, type: :model do
       expect(admin.admin?).to be_truthy
     end
   end
+
+  describe 'instance methods' do
+    before(:each) do
+      @user = User.create(email: 'user@email.com', password: 'password', first_name:'Jim', last_name:'Smith', role: 0)
+    end
+
+    it "can print its full name" do
+      expect(@user.full_name).to eq('Jim Smith')
+    end
+
+    it "can tell if it is friends with another user" do
+      gh_user_data = { login: 'rhantak', html_url: 'github.com/rhantak', id: 123 }
+      gh_user = GithubUser.new(gh_user_data)
+      user_2 = create(:user, gh_id: gh_user.gh_id)
+
+      expect(@user.friends_with?(gh_user)).to eq(false)
+
+      Friendship.create(user_id: @user.id, friend_id: user_2.id)
+
+      expect(@user.friends_with?(gh_user)).to eq(true)
+    end
+
+    it "can make a hash of its bookmarks grouped by tutourial id" do
+      tutorial_1 = create(:tutorial)
+      tutorial_2 = create(:tutorial)
+      video_1 = create(:video, tutorial_id: tutorial_1.id, position: 3)
+      video_2 = create(:video, tutorial_id: tutorial_2.id, position: 1)
+      video_3 = create(:video, tutorial_id: tutorial_1.id, position: 1)
+      video_4 = create(:video, tutorial_id: tutorial_1.id, position: 2)
+
+      @user.user_videos.create(video_id: video_1.id)
+      @user.user_videos.create(video_id: video_2.id)
+      @user.user_videos.create(video_id: video_3.id)
+      @user.user_videos.create(video_id: video_4.id)
+
+      expected = { tutorial_1.id => [video_3, video_4, video_1],
+                    tutorial_2.id => [video_2] }
+      expect(@user.bookmarks).to eq(expected)
+    end
+  end
 end
