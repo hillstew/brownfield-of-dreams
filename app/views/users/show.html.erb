@@ -27,7 +27,7 @@
         <% user.followers.each do |follower| %>
           <section id="follower-links-<%= follower.gh_id %>">
             <%= link_to follower.name.capitalize, follower.url, class: 'github-follower' %>
-            <%= link_to "Add Friend", add_friend_path(follower.gh_id) if follower.has_account? && !user.friends_with?(follower) %>
+            <%= link_to "Add Friend", add_friend_path(follower.gh_id) if follower.account? && !user.friends_with?(follower) %>
           </section>
           <% end %>
       <% else %>
@@ -40,7 +40,7 @@
         <% user.following.each do |following| %>
           <section id="following-links-<%= following.gh_id %>">
             <%= link_to following.name.capitalize, following.url, class: 'github-following' %>
-            <%= link_to "Add Friend", add_friend_path(following.gh_id) if following.has_account? && !user.friends_with?(following) %>
+            <%= link_to "Add Friend", add_friend_path(following.gh_id) if following.account? && !user.friends_with?(following) %>
           </section>
         <% end %>
       <% else %>

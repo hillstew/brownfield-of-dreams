@@ -1,3 +1,4 @@
+# app/controllers/tutorials_controller.rb
 class TutorialsController < ApplicationController
   def show
     tutorial = Tutorial.find(params[:id])

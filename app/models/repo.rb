@@ -1,3 +1,4 @@
+# app/models/repo.rb
 class Repo
   attr_reader :name, :url
 

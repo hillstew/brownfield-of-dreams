@@ -16,7 +16,7 @@ RSpec.describe "User", :vcr do
 
      expect(current_path).to eq(dashboard_path)
 
-     message = "The Github user you selected doesn't have an email address associated with their account."
+     message = "The Github user you selected does not have an email address associated with their account."
      expect(page).to have_content(message)
   end
 end
