@@ -43,5 +43,23 @@ RSpec.describe User, type: :model do
 
       expect(@user.friends_with?(gh_user)).to eq(true)
     end
+
+    it "can make a hash of its bookmarks grouped by tutourial id" do
+      tutorial_1 = create(:tutorial)
+      tutorial_2 = create(:tutorial)
+      video_1 = create(:video, tutorial_id: tutorial_1.id, position: 3)
+      video_2 = create(:video, tutorial_id: tutorial_2.id, position: 1)
+      video_3 = create(:video, tutorial_id: tutorial_1.id, position: 1)
+      video_4 = create(:video, tutorial_id: tutorial_1.id, position: 2)
+
+      @user.user_videos.create(video_id: video_1.id)
+      @user.user_videos.create(video_id: video_2.id)
+      @user.user_videos.create(video_id: video_3.id)
+      @user.user_videos.create(video_id: video_4.id)
+
+      expected = { tutorial_1.id => [video_3, video_4, video_1],
+                    tutorial_2.id => [video_2] }
+      expect(@user.bookmarks).to eq(expected)
+    end
   end
 end
