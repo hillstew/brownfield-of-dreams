@@ -8,7 +8,4 @@ AllCops:
     - "db/**/*"
     - "bin/**/*"
     - "lib/**/*"
-    - "config/environments/*"
-    - "config/initializers/*"
-    - "config/puma.rb"
-    - "config/application.rb"
+    - "config/**/*"
