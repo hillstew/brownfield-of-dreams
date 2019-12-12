@@ -13,11 +13,11 @@ module Admin
     def create
       begin
         tutorial = Tutorial.find(params[:tutorial_id])
-        thumbnail = YouTube::Video.by_id(new_vid_params[:video_id]).thumbnail
+        thumbnail = youtube_thumbnail
         video = tutorial.videos.new(new_vid_params.merge(thumbnail: thumbnail))
         video.save
         flash[:success] = 'Successfully created video.'
-      rescue
+      rescue StandardError
         flash[:error] = 'Unable to create video.'
       end
       redirect_to edit_admin_tutorial_path(id: tutorial.id)
@@ -32,6 +32,10 @@ module Admin
     def new_vid_params
       params.require(:video)
             .permit(:title, :description, :video_id, :thumbnail)
+    end
+
+    def youtube_thumbnail
+      YouTube::Video.by_id(new_vid_params[:video_id]).thumbnail
     end
   end
 end
