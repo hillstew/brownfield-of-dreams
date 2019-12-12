@@ -22,4 +22,26 @@ RSpec.describe User, type: :model do
       expect(admin.admin?).to be_truthy
     end
   end
+
+  describe 'instance methods' do
+    before(:each) do
+      @user = User.create(email: 'user@email.com', password: 'password', first_name:'Jim', last_name:'Smith', role: 0)
+    end
+
+    it "can print its full name" do
+      expect(@user.full_name).to eq('Jim Smith')
+    end
+
+    it "can tell if it is friends with another user" do
+      gh_user_data = { login: 'rhantak', html_url: 'github.com/rhantak', id: 123 }
+      gh_user = GithubUser.new(gh_user_data)
+      user_2 = create(:user, gh_id: gh_user.gh_id)
+
+      expect(@user.friends_with?(gh_user)).to eq(false)
+
+      Friendship.create(user_id: @user.id, friend_id: user_2.id)
+
+      expect(@user.friends_with?(gh_user)).to eq(true)
+    end
+  end
 end
